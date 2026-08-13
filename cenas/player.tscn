@@ -1,5 +1,6 @@
 [gd_scene format=4 uid="uid://sm0upmbeis3l"]
 
+[ext_resource type="Script" uid="uid://cycrlcu5m4pwx" path="res://cenas/player.gd" id="1_4y2i1"]
 [ext_resource type="Texture2D" uid="uid://dnuteubxltksb" path="res://material_freeway/galinha/baixo/sprite_0.png" id="1_8v4ht"]
 [ext_resource type="Texture2D" uid="uid://guaxqvopyajl" path="res://material_freeway/galinha/cima/sprite_0.png" id="1_kthid"]
 [ext_resource type="Texture2D" uid="uid://b7omrnh6vjeu0" path="res://material_freeway/galinha/baixo/sprite_1.png" id="2_4y2i1"]
@@ -50,12 +51,13 @@ tags = {
 }
 
 [node name="Player" type="Area2D" unique_id=674639014]
+script = ExtResource("1_4y2i1")
 
 [node name="Animacao" type="AnimatedSprite2D" parent="." unique_id=353383984]
 scale = Vector2(0.3, 0.3)
 sprite_frames = SubResource("SpriteFrames_8ki28")
 animation = &"baixo"
-frame_progress = 0.21160814
+frame_progress = 0.11203396
 
 [node name="Colisao" type="CollisionShape2D" parent="." unique_id=1556595552]
 shape = SubResource("CircleShape2D_8v4ht")
