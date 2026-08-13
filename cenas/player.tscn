@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://sm0upmbeis3l"]
+
+[node name="Player" type="Area2D" unique_id=674639014]
+
+[node name="Animacao" type="AnimatedSprite2D" parent="." unique_id=353383984]
+
+[node name="Colisao" type="CollisionShape2D" parent="." unique_id=1556595552]
+
+[node name="Audio" type="AudioStreamPlayer2D" parent="." unique_id=632306909]
