@@ -135,6 +135,7 @@ size = Vector2(96, 66)
 
 [node name="Carros" type="RigidBody2D" unique_id=2050511640]
 collision_layer = 4
+gravity_scale = 0.0
 
 [node name="Animacao" type="AnimatedSprite2D" parent="." unique_id=985552428]
 rotation = 1.5707964
