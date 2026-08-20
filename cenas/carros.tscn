@@ -1,9 +1,148 @@
 [gd_scene format=3 uid="uid://4s25tkywyni3"]
 
+[ext_resource type="Texture2D" uid="uid://dkej0u6hcjnc8" path="res://material_freeway/carros/coches (1).png" id="1_4jdfh"]
+[ext_resource type="Texture2D" uid="uid://cg54fc4jfjyb" path="res://material_freeway/carros/coches (10).png" id="2_cc5d5"]
+[ext_resource type="Texture2D" uid="uid://cobajci67aerf" path="res://material_freeway/carros/coches (11).png" id="3_pxsbw"]
+[ext_resource type="Texture2D" uid="uid://bbgtx183dpjd4" path="res://material_freeway/carros/coches (12).png" id="4_s6fhs"]
+[ext_resource type="Texture2D" uid="uid://cxlc7yx6o0ep1" path="res://material_freeway/carros/coches (13).png" id="5_kkxbi"]
+[ext_resource type="Texture2D" uid="uid://y1lr1411b7xi" path="res://material_freeway/carros/coches (14).png" id="6_a7qyf"]
+[ext_resource type="Texture2D" uid="uid://df3qyjk7d6ffv" path="res://material_freeway/carros/coches (2).png" id="7_fnj2t"]
+[ext_resource type="Texture2D" uid="uid://2b68h4jj8chk" path="res://material_freeway/carros/coches (3).png" id="8_tk7h6"]
+[ext_resource type="Texture2D" uid="uid://dwjb7aiotmnw1" path="res://material_freeway/carros/coches (4).png" id="9_hm1y0"]
+[ext_resource type="Texture2D" uid="uid://wlcbbaeaw0b3" path="res://material_freeway/carros/coches (5).png" id="10_35crm"]
+[ext_resource type="Texture2D" uid="uid://bih2rwfwlloyq" path="res://material_freeway/carros/coches (6).png" id="11_bobfm"]
+[ext_resource type="Texture2D" uid="uid://bc07ngj8p17je" path="res://material_freeway/carros/coches (7).png" id="12_lu8g5"]
+[ext_resource type="Texture2D" uid="uid://c24kfejiext2h" path="res://material_freeway/carros/coches (8).png" id="13_ka2dd"]
+[ext_resource type="Texture2D" uid="uid://dsqimjffmo8qk" path="res://material_freeway/carros/coches (9).png" id="14_xqy8m"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5wwvk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_4jdfh")
+}],
+"loop": 1,
+"name": &"carro1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_cc5d5")
+}],
+"loop": 1,
+"name": &"carro10",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_pxsbw")
+}],
+"loop": 1,
+"name": &"carro11",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_s6fhs")
+}],
+"loop": 1,
+"name": &"carro12",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_kkxbi")
+}],
+"loop": 1,
+"name": &"carro13",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_a7qyf")
+}],
+"loop": 1,
+"name": &"carro14",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_fnj2t")
+}],
+"loop": 1,
+"name": &"carro2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_tk7h6")
+}],
+"loop": 1,
+"name": &"carro3",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_hm1y0")
+}],
+"loop": 1,
+"name": &"carro4",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_35crm")
+}],
+"loop": 1,
+"name": &"carro5",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_bobfm")
+}],
+"loop": 1,
+"name": &"carro6",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_lu8g5")
+}],
+"loop": 1,
+"name": &"carro7",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_ka2dd")
+}],
+"loop": 1,
+"name": &"carro8",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_xqy8m")
+}],
+"loop": 1,
+"name": &"carro9",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4jdfh"]
+size = Vector2(96, 66)
+
 [node name="Carros" type="RigidBody2D" unique_id=2050511640]
 
 [node name="Animacao" type="AnimatedSprite2D" parent="." unique_id=985552428]
+rotation = 1.5707964
+scale = Vector2(0.4, 0.4)
+sprite_frames = SubResource("SpriteFrames_5wwvk")
+animation = &"carro4"
 
 [node name="Colisao" type="CollisionShape2D" parent="." unique_id=162074753]
+shape = SubResource("RectangleShape2D_4jdfh")
 
 [node name="Notificador" type="VisibleOnScreenNotifier2D" parent="." unique_id=1421590695]
+rect = Rect2(-46, -30, 92, 60)

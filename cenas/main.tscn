@@ -6,12 +6,12 @@
 
 [node name="Main" type="Node" unique_id=1257166544]
 
-[node name="Player" parent="." unique_id=674639014 instance=ExtResource("1_t4ukd")]
-position = Vector2(640, 690)
-
 [node name="Pista" type="Sprite2D" parent="." unique_id=324805587]
 texture = ExtResource("3_4fhxt")
 centered = false
 
 [node name="LinhaChegada" parent="." unique_id=1546344210 instance=ExtResource("2_4fhxt")]
 position = Vector2(640, 64)
+
+[node name="Player" parent="." unique_id=674639014 instance=ExtResource("1_t4ukd")]
+position = Vector2(640, 690)
