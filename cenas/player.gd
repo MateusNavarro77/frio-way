@@ -1,6 +1,6 @@
 extends Area2D
 #posicionar
-
+signal pontua
 @export var speed: float = 100.0 #100 pixels por segundo
 var posicao_inicial: Vector2 = Vector2(640,690)
 var screen_size: Vector2
@@ -42,3 +42,11 @@ func _process(delta: float) -> void:
 #FALAR O NOME DO ARTHUR
 func somaDoida(a:float,b:float) -> float:
 		return a+b
+
+
+func _on_body_entered(body: Node2D) -> void:
+	if (body.name == "LinhaChegada"):
+		emit_signal("pontua")
+		return
+	$Audio.play()
+	position = posicao_inicial

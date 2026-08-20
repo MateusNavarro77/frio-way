@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://4s25tkywyni3"]
+
+[node name="Carros" type="RigidBody2D" unique_id=2050511640]
+
+[node name="Animacao" type="AnimatedSprite2D" parent="." unique_id=985552428]
+
+[node name="Colisao" type="CollisionShape2D" parent="." unique_id=162074753]
+
+[node name="Notificador" type="VisibleOnScreenNotifier2D" parent="." unique_id=1421590695]
