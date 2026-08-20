@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://0heg7p342gfo"]
+
+[node name="HUD" type="CanvasLayer" unique_id=984349647]
+
+[node name="Placar" type="Label" parent="." unique_id=399657525]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Mensagem" type="Label" parent="." unique_id=384050238]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Button" type="Button" parent="." unique_id=76160965]
+offset_right = 8.0
+offset_bottom = 8.0

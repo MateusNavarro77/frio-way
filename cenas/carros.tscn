@@ -150,3 +150,5 @@ shape = SubResource("RectangleShape2D_4jdfh")
 
 [node name="Notificador" type="VisibleOnScreenNotifier2D" parent="." unique_id=1421590695]
 rect = Rect2(-46, -30, 92, 60)
+
+[connection signal="screen_exited" from="Notificador" to="." method="_on_notificador_screen_exited"]

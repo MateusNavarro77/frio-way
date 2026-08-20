@@ -39,7 +39,7 @@ func _process(delta: float) -> void:
 	else:
 		$Animacao.stop()
 		
-#FALAR O NOME DO ARTHUR
+
 func somaDoida(a:float,b:float) -> float:
 		return a+b
 
