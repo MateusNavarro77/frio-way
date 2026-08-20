@@ -1,15 +1,64 @@
 [gd_scene format=3 uid="uid://0heg7p342gfo"]
 
-[node name="HUD" type="CanvasLayer" unique_id=984349647]
+[ext_resource type="Script" uid="uid://gynmjfih7ixy" path="res://cenas/hud.gd" id="1_8alo0"]
+[ext_resource type="FontFile" uid="uid://c7xrk54y2atij" path="res://material_freeway/PressStart2P-Regular.ttf" id="1_nkjil"]
 
-[node name="Placar" type="Label" parent="." unique_id=399657525]
-offset_right = 40.0
-offset_bottom = 23.0
+[sub_resource type="LabelSettings" id="LabelSettings_p2jtt"]
+
+[node name="HUD" type="CanvasLayer" unique_id=984349647]
+script = ExtResource("1_8alo0")
 
 [node name="Mensagem" type="Label" parent="." unique_id=384050238]
-offset_right = 40.0
-offset_bottom = 23.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -288.0
+offset_top = -24.0
+offset_right = 288.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("1_nkjil")
+theme_override_font_sizes/font_size = 48
+text = "Voce ganhou!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Placar" type="Label" parent="." unique_id=399657525]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -50.0
+offset_right = 50.0
+offset_bottom = 60.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("1_nkjil")
+theme_override_font_sizes/font_size = 32
+text = "0"
+label_settings = SubResource("LabelSettings_p2jtt")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Button" type="Button" parent="." unique_id=76160965]
-offset_right = 8.0
-offset_bottom = 8.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = 70.0
+offset_right = 150.0
+offset_bottom = 130.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("1_nkjil")
+theme_override_font_sizes/font_size = 32
+text = "Restart"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
