@@ -4,6 +4,9 @@
 [ext_resource type="PackedScene" uid="uid://bxevocoawcnjj" path="res://cenas/linha_chegada.tscn" id="2_4fhxt"]
 [ext_resource type="Texture2D" uid="uid://dfiyisexsfvti" path="res://material_freeway/wallpaperfreeway.png" id="3_4fhxt"]
 [ext_resource type="PackedScene" uid="uid://0heg7p342gfo" path="res://cenas/hud.tscn" id="4_b30p5"]
+[ext_resource type="AudioStream" uid="uid://cqltv8b2y70gb" path="res://material_freeway/sons/tema.wav" id="5_5wwvk"]
+[ext_resource type="AudioStream" uid="uid://bui5ikf6dtgai" path="res://material_freeway/sons/ponto.wav" id="6_bhvw8"]
+[ext_resource type="AudioStream" uid="uid://bj8al8nstad8o" path="res://material_freeway/sons/ganhou.wav" id="7_l8342"]
 
 [node name="Main" type="Node" unique_id=1257166544]
 
@@ -20,11 +23,18 @@ position = Vector2(640, 690)
 [node name="HUD" parent="." unique_id=984349647 instance=ExtResource("4_b30p5")]
 
 [node name="TimerCarrosRapidos" type="Timer" parent="." unique_id=495782205]
+wait_time = 0.3
+autostart = true
 
 [node name="TimerCarrosLentos" type="Timer" parent="." unique_id=1153004196]
+wait_time = 0.485
+autostart = true
 
 [node name="AudioTema" type="AudioStreamPlayer2D" parent="." unique_id=27759001]
+stream = ExtResource("5_5wwvk")
 
 [node name="AudioPonto" type="AudioStreamPlayer2D" parent="." unique_id=1268151864]
+stream = ExtResource("6_bhvw8")
 
 [node name="AudioVitoria" type="AudioStreamPlayer2D" parent="." unique_id=94254694]
+stream = ExtResource("7_l8342")
