@@ -23,12 +23,19 @@ func _process(delta: float) -> void:
 	
 	if(Input.is_action_pressed("ui_down")):
 		vetor_velocidade.y +=1
+		
+	if(Input.is_action_pressed("ui_right")):
+		vetor_velocidade.x +=1
+	
+	if(Input.is_action_pressed("ui_left")):
+		vetor_velocidade.x -=1
 	
 	if(vetor_velocidade !=Vector2.ZERO):
 		vetor_velocidade = vetor_velocidade.normalized()*speed
 	
 	position +=vetor_velocidade*delta
 	position.y = clamp(position.y,0.0,screen_size.y)
+	position.x = clamp(position.x,0.0,screen_size.x)
 	
 	if(vetor_velocidade.y > 0):
 		$Animacao.play("baixo")
