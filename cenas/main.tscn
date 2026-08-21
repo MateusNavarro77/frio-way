@@ -32,6 +32,7 @@ autostart = true
 
 [node name="AudioTema" type="AudioStreamPlayer2D" parent="." unique_id=27759001]
 stream = ExtResource("5_5wwvk")
+autoplay = true
 
 [node name="AudioPonto" type="AudioStreamPlayer2D" parent="." unique_id=1268151864]
 stream = ExtResource("6_bhvw8")
