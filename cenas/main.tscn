@@ -41,3 +41,7 @@ stream = ExtResource("6_bhvw8")
 
 [node name="AudioVitoria" type="AudioStreamPlayer2D" parent="." unique_id=94254694]
 stream = ExtResource("7_l8342")
+
+[connection signal="pontua" from="Player" to="." method="_on_player_pontua"]
+[connection signal="timeout" from="TimerCarrosRapidos" to="." method="_on_timer_carros_rapidos_timeout"]
+[connection signal="timeout" from="TimerCarrosLentos" to="." method="_on_timer_carros_lentos_timeout"]

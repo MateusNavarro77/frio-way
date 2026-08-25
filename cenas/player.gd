@@ -1,7 +1,7 @@
 extends Area2D
 #posicionar
 signal pontua
-@export var speed: float = 100.0 #100 pixels por segundo
+@export var speed: float = 200.0 #100 pixels por segundo
 var posicao_inicial: Vector2 = Vector2(640,690)
 var screen_size: Vector2
 
