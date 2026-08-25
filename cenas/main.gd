@@ -59,6 +59,11 @@ func _on_player_pontua() -> void:
 	if(pontos==10):
 		$HUD/Mensagem.text ='A Galinha nao foi triturada! Voce sobreviveu!'
 		$HUD/Button.show()
+		$TimerCarrosLentos.stop()
+		$TimerCarrosRapidos.stop()
+		$AudioTema.stop()
+		$AudioVitoria.play()
+		$Player.speed = 0
 		pass
 	
 	pass # Replace with function body.
