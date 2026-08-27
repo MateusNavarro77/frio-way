@@ -141,7 +141,7 @@ script = ExtResource("1_cc5d5")
 
 [node name="Animacao" type="AnimatedSprite2D" parent="." unique_id=985552428]
 rotation = 1.5707964
-scale = Vector2(0.4, 0.4)
+scale = Vector2(0.2, 0.2)
 sprite_frames = SubResource("SpriteFrames_5wwvk")
 animation = &"carro4"
 

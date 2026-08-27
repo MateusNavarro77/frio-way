@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://yf6qgxyq1buv"]
+
+[ext_resource type="Texture2D" uid="uid://dkej0u6hcjnc8" path="res://material_freeway/carros/coches (1).png" id="1_gv5ow"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3wfqf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_gv5ow")
+}],
+"loop": 1,
+"name": &"onibus_fortal",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gv5ow"]
+size = Vector2(236, 159)
+
+[node name="Onibus" type="RigidBody2D" unique_id=604640141]
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=486331101]
+rect = Rect2(-109, -68, 223, 149)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1637754287]
+rotation = 1.5707964
+sprite_frames = SubResource("SpriteFrames_3wfqf")
+animation = &"onibus_fortal"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1455789798]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_gv5ow")
