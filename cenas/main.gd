@@ -2,7 +2,18 @@ extends Node
 
 
 var cena_carros = preload("res://cenas/carros.tscn")
-var pistas_rapidas_y = [104,272,488]
+## FAiXAS novas
+## 117 onibus
+## 183 carro
+## 240 carro
+## 287 carro
+## 338 bicicleta
+## 367 bicicleta
+## 423 carro
+## 480 carro
+## 540 carro
+## 604 onibus
+var pistas_rapidas_y = [117,183,240,287,338,367,423,480,540,604]
 var pistas_lentas_y = [160,216,324,384,438,544,600]
 var origem_carros_x = -10
 var velocidade_dos_rapidos = 700
