@@ -1,9 +1,5 @@
 extends Node
 
-
-var cena_carros = preload("res://cenas/carros.tscn")
-var cena_onibus = preload("res://cenas/onibus.tscn")
-var cena_bicicleta = preload("res://cenas/bicicleta.tscn")
 ## FAiXAS novas
 ## 117 onibus
 ## 183 carro
@@ -15,182 +11,360 @@ var cena_bicicleta = preload("res://cenas/bicicleta.tscn")
 ## 480 carro
 ## 540 carro
 ## 604 onibus
-var pistas_rapidas_y = [183,287,480]
-var faixas_de_onibus = [117,604]
-var pistas_lentas_y = [160,216,324,384,438,544,600]
+# ==========================================
+# CENAS
+# ==========================================
+
+var cena_carros = preload("res://cenas/carros.tscn")
+var cena_onibus = preload("res://cenas/onibus.tscn")
+var cena_bicicleta = preload("res://cenas/bicicleta.tscn")
+
+
+# ==========================================
+# POSIÇÕES DE NASCIMENTO
+# ==========================================
+
 var origem_carros_x_esquerda = -10
 var origem_carros_x_direita = 1290
+
+
+# ==========================================
+# VELOCIDADES
+# ==========================================
+
 var velocidade_dos_rapidos = 700
+var velocidade_dos_lentos = 300
 var velocidade_onibus = 400.0
 var velocidade_bicicleta = 200
 
-enum Direcao { ESQUERDA, DIREITA }
+
+# ==========================================
+# DIREÇÃO
+# ==========================================
+#
+# ESQUERDA:
+#   nasce na DIREITA
+#   vai para a ESQUERDA
+#
+# DIREITA:
+#   nasce na ESQUERDA
+#   vai para a DIREITA
+#
+
+enum Direcao {
+	ESQUERDA,
+	DIREITA
+}
+
+
+# ==========================================
+# ORIGEM DOS VEÍCULOS
+# ==========================================
+
 class OrigemVeiculos:
 	var posicao_x: int
 	var posicao_y: int
 	var direcao: Direcao
 	
-	# This constructor lets you pass values when making it
-	func _init(p_posx: int,p_posy: int, p_dir: Direcao) -> void:
+	func _init(p_posx: int, p_posy: int, p_dir: Direcao) -> void:
 		posicao_x = p_posx
 		posicao_y = p_posy
 		direcao = p_dir
 
+
+# ==========================================
+# POSIÇÕES DOS CARROS RÁPIDOS
+# ==========================================
+
+var posicoes_carros_rapidos: Array[OrigemVeiculos] = [
+	# Nasce na esquerda e vai para a direita
+	OrigemVeiculos.new(origem_carros_x_direita, 183, Direcao.ESQUERDA),
+
+	# Nasce na esquerda e vai para a direita
+	OrigemVeiculos.new(origem_carros_x_direita, 287, Direcao.ESQUERDA),
+
+	# Nasce na direita e vai para a esquerda
+	OrigemVeiculos.new(origem_carros_x_esquerda, 480, Direcao.DIREITA)
+]
+
+
+# ==========================================
+# POSIÇÕES DOS CARROS LENTOS
+# ==========================================
+
+var posicoes_carros_lentos: Array[OrigemVeiculos] = [
+	# Nasce na direita e vai para a esquerda
+	OrigemVeiculos.new(origem_carros_x_direita, 240, Direcao.ESQUERDA),
+
+	# Nasce na esquerda e vai para a direita
+	OrigemVeiculos.new(origem_carros_x_esquerda, 423, Direcao.DIREITA),
+
+	# Nasce na esquerda e vai para a direita
+	OrigemVeiculos.new(origem_carros_x_esquerda, 540, Direcao.DIREITA)
+]
+
+
+# ==========================================
+# POSIÇÕES DOS ÔNIBUS
+# ==========================================
+
 var posicoes_onibus: Array[OrigemVeiculos] = [
-	OrigemVeiculos.new(origem_carros_x_esquerda,604,Direcao.ESQUERDA),
-	OrigemVeiculos.new(origem_carros_x_direita,117,Direcao.DIREITA)
+	# Nasce na direita e vai para a esquerda
+	OrigemVeiculos.new(origem_carros_x_esquerda, 604, Direcao.DIREITA),
+
+	# Nasce na esquerda e vai para a direita
+	OrigemVeiculos.new(origem_carros_x_direita, 117, Direcao.ESQUERDA)
 ]
+
+
+# ==========================================
+# POSIÇÕES DAS BICICLETAS
+# ==========================================
+
 var posicoes_bicletas: Array[OrigemVeiculos] = [
-	OrigemVeiculos.new(origem_carros_x_esquerda,338,Direcao.ESQUERDA),
-	OrigemVeiculos.new(origem_carros_x_direita,367,Direcao.DIREITA)
+	# Nasce na direita e vai para a esquerda
+	OrigemVeiculos.new(origem_carros_x_direita, 338, Direcao.ESQUERDA),
+
+	# Nasce na esquerda e vai para a direita
+	OrigemVeiculos.new(origem_carros_x_esquerda, 367, Direcao.DIREITA)
 ]
-var velocidade_dos_lentos = 300
-@onready var player:  = $Player
+
+
+# ==========================================
+# PLAYER / HUD
+# ==========================================
+
+@onready var player = $Player
 @onready var hud: CanvasLayer = $HUD
+
 var pontos = 0
-# Called when the node enters the scene tree for the first time.
+
+
+# ==========================================
+# READY
+# ==========================================
+
 func _ready() -> void:
-	$HUD/Mensagem.text =''
+	$HUD/Mensagem.text = ""
 	$HUD/Button.hide()
-	#if(player):
-	#	player.pontua.connect(_on_pontua)
-	pass # Replace with function body.
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+# ==========================================
+# PROCESS
+# ==========================================
+
 func _process(delta: float) -> void:
 	pass
 
-#func _on_pontua():
-#	pontos = pontos +1
-#	hud._on_pontua(pontos)
 
+# ==========================================
+# CARROS RÁPIDOS
+# ==========================================
 
 func _on_timer_carros_rapidos_timeout() -> void:
 	var carro = cena_carros.instantiate()
 	add_child(carro)
-	var aleatorio = randi_range(0,pistas_rapidas_y.size()-1)
-	var posicao_pista_y = pistas_rapidas_y[aleatorio]
-	carro.position = Vector2(origem_carros_x_esquerda,posicao_pista_y)
-	carro.set_linear_velocity(Vector2(randf_range(velocidade_dos_rapidos,velocidade_dos_rapidos+10),0))
+
+	# Escolhe uma origem aleatória
+	var aleatorio = randi_range(0, posicoes_carros_rapidos.size() - 1)
+	var dados_origem: OrigemVeiculos = posicoes_carros_rapidos[aleatorio]
+
+	# Define posição de nascimento
+	carro.position = Vector2(
+		dados_origem.posicao_x,
+		dados_origem.posicao_y
+	)
+
+	# Define direção
+	if dados_origem.direcao == Direcao.ESQUERDA:
+		# Nasceu na direita -> vai para a esquerda
+		carro.set_linear_velocity(
+			Vector2(
+				-randf_range(
+					velocidade_dos_rapidos,
+					velocidade_dos_rapidos + 10
+				),
+				0
+			)
+		)
+
+		if carro.has_node("Sprite2D"):
+			carro.get_node("Sprite2D").flip_h = true
+
+	elif dados_origem.direcao == Direcao.DIREITA:
+		# Nasceu na esquerda -> vai para a direita
+		carro.set_linear_velocity(
+			Vector2(
+				randf_range(
+					velocidade_dos_rapidos,
+					velocidade_dos_rapidos + 10
+				),
+				0
+			)
+		)
+
 	carro.set_linear_damp(0.0)
-	pass # Replace with function body.
 
 
-
+# ==========================================
+# CARROS LENTOS
+# ==========================================
 
 func _on_timer_carros_lentos_timeout() -> void:
 	var carro = cena_carros.instantiate()
 	add_child(carro)
-	var aleatorio = randi_range(0,pistas_lentas_y.size()-1)
-	var posicao_pista_y = pistas_lentas_y[aleatorio]
-	carro.position = Vector2(origem_carros_x_esquerda,posicao_pista_y)
-	carro.set_linear_velocity(Vector2(randf_range(velocidade_dos_lentos,velocidade_dos_lentos+100),0))
-	carro.set_linear_damp(0.0)
-	pass # Replace with function body.
 
+	# Escolhe uma origem aleatória
+	var aleatorio = randi_range(0, posicoes_carros_lentos.size() - 1)
+	var dados_origem: OrigemVeiculos = posicoes_carros_lentos[aleatorio]
+
+	# Define posição de nascimento
+	carro.position = Vector2(
+		dados_origem.posicao_x,
+		dados_origem.posicao_y
+	)
+
+	# Define direção
+	if dados_origem.direcao == Direcao.ESQUERDA:
+		# Nasceu na direita -> vai para a esquerda
+		carro.set_linear_velocity(
+			Vector2(
+				-randf_range(
+					velocidade_dos_lentos,
+					velocidade_dos_lentos + 100
+				),
+				0
+			)
+		)
+
+		if carro.has_node("Sprite2D"):
+			carro.get_node("Sprite2D").flip_h = true
+
+	elif dados_origem.direcao == Direcao.DIREITA:
+		# Nasceu na esquerda -> vai para a direita
+		carro.set_linear_velocity(
+			Vector2(
+				randf_range(
+					velocidade_dos_lentos,
+					velocidade_dos_lentos + 100
+				),
+				0
+			)
+		)
+
+	carro.set_linear_damp(0.0)
+
+
+# ==========================================
+# PONTUAÇÃO
+# ==========================================
 
 func _on_player_pontua() -> void:
-	pontos = pontos +1
+	pontos = pontos + 1
 	hud._on_pontua(pontos)
-	if(pontos==10):
-		$HUD/Mensagem.text ='A Galinha nao foi triturada! Voce sobreviveu!'
+
+	if pontos == 10:
+		$HUD/Mensagem.text = "Sobreviveu!"
 		$HUD/Button.show()
+
 		$TimerCarrosLentos.stop()
 		$TimerCarrosRapidos.stop()
+
 		$AudioTema.stop()
 		$AudioVitoria.play()
-		$Player.speed = 0
-		pass
-	
-	pass # Replace with function body.
 
+		$Player.speed = 0
+
+
+# ==========================================
+# ÔNIBUS
+# ==========================================
 
 func _on_timer_onibus_timeout() -> void:
 	var onibus = cena_onibus.instantiate()
 	add_child(onibus)
-	
-	# 1. Get a random index
-	var aleatorio = randi_range(0, posicoes_onibus.size() - 1)
-	
-	# 2. Extract the specific OrigemVeiculos element from the array
-	var dados_origem: OrigemVeiculos = posicoes_onibus[aleatorio]
-	
-	
-	var spawn_x = dados_origem.posicao_x
-	var spawn_y = dados_origem.posicao_y
-	
-	# Set the position using the extracted data
-	onibus.position = Vector2(spawn_x, spawn_y)
-	
-	# 4. Check the enum value to determine velocity direction
-	
-	if dados_origem.direcao == Direcao.ESQUERDA:
-		# Moving from left to right (Positive X velocity)
-		onibus.set_linear_velocity(Vector2(velocidade_onibus, 0))
-	elif dados_origem.direcao == Direcao.DIREITA:
-		# Moving from right to left (Negative X velocity)
-		onibus.set_linear_velocity(Vector2(-velocidade_onibus, 0))
-		
-		# Optional: Flip the sprite so the bus looks like it's driving left
-		# assuming your bus scene has a Sprite2D or AnimatedSprite2D root
-		if onibus.has_node("Sprite2D"): 
-			onibus.get_node("Sprite2D").flip_h = true
-			
-	onibus.set_linear_damp(0.0)
-	
-	
 
+	# Escolhe uma origem aleatória
+	var aleatorio = randi_range(0, posicoes_onibus.size() - 1)
+	var dados_origem: OrigemVeiculos = posicoes_onibus[aleatorio]
+
+	# Define posição
+	onibus.position = Vector2(
+		dados_origem.posicao_x,
+		dados_origem.posicao_y
+	)
+
+	# Define direção
+	if dados_origem.direcao == Direcao.ESQUERDA:
+		# Nasceu na direita -> vai para a esquerda
+		onibus.set_linear_velocity(
+			Vector2(-velocidade_onibus, 0)
+		)
+
+		if onibus.has_node("Sprite2D"):
+			onibus.get_node("Sprite2D").flip_h = true
+
+	elif dados_origem.direcao == Direcao.DIREITA:
+		# Nasceu na esquerda -> vai para a direita
+		onibus.set_linear_velocity(
+			Vector2(velocidade_onibus, 0)
+		)
+
+	onibus.set_linear_damp(0.0)
+
+
+# ==========================================
+# BICICLETAS
+# ==========================================
 
 func _on_timer_bicicleta_timeout() -> void:
 	var bicicleta = cena_bicicleta.instantiate()
 	add_child(bicicleta)
-	
-	# 1. Get a random index
-	var aleatorio = randi_range(0, posicoes_bicletas.size() - 1)
-	
-	# 2. Extract the specific OrigemVeiculos element from the array
-	var dados_origem: OrigemVeiculos = posicoes_bicletas[aleatorio]
-	
-	
-	var spawn_x = dados_origem.posicao_x
-	var spawn_y = dados_origem.posicao_y
-	
-	# Set the position using the extracted data
-	bicicleta.position = Vector2(spawn_x, spawn_y)
-	
-	# 4. Check the enum value to determine velocity direction
-	
-	if dados_origem.direcao == Direcao.ESQUERDA:
-		# Moving from left to right (Positive X velocity)
-		bicicleta.set_linear_velocity(Vector2(velocidade_bicicleta, 0))
-	elif dados_origem.direcao == Direcao.DIREITA:
-		# Moving from right to left (Negative X velocity)
-		bicicleta.set_linear_velocity(Vector2(-velocidade_bicicleta, 0))
-		
-		# Optional: Flip the sprite so the bus looks like it's driving left
-		# assuming your bus scene has a Sprite2D or AnimatedSprite2D root
-		if bicicleta.has_node("Sprite2D"): 
-			bicicleta.get_node("Sprite2D").flip_h = true
-			
-	bicicleta.set_linear_damp(0.0)
-	
-	
 
+	# Escolhe uma origem aleatória
+	var aleatorio = randi_range(0, posicoes_bicletas.size() - 1)
+	var dados_origem: OrigemVeiculos = posicoes_bicletas[aleatorio]
+
+	# Define posição
+	bicicleta.position = Vector2(
+		dados_origem.posicao_x,
+		dados_origem.posicao_y
+	)
+
+	# Define direção
+	if dados_origem.direcao == Direcao.ESQUERDA:
+		# Nasceu na direita -> vai para a esquerda
+		bicicleta.set_linear_velocity(
+			Vector2(-velocidade_bicicleta, 0)
+		)
+
+		if bicicleta.has_node("Sprite2D"):
+			bicicleta.get_node("Sprite2D").flip_h = true
+
+	elif dados_origem.direcao == Direcao.DIREITA:
+		# Nasceu na esquerda -> vai para a direita
+		bicicleta.set_linear_velocity(
+			Vector2(velocidade_bicicleta, 0)
+		)
+
+	bicicleta.set_linear_damp(0.0)
+
+
+# ==========================================
+# PLAYER MORREU
+# ==========================================
 
 func _on_player_morreu() -> void:
 	pontos = 0
-	##hud._on_pontua(pontos)
-	##if(pontos==10):
-	$HUD/Mensagem.text ='GAME OVER ;-;'
+
+	$HUD/Mensagem.text = "GAME OVER ;-;"
 	$HUD/Button.show()
+
 	$TimerCarrosLentos.stop()
 	$TimerCarrosRapidos.stop()
 	$TimerOnibus.stop()
 	$TimerBicicleta.stop()
+
 	$AudioGameOver.play()
-	
+
 	$Player.speed = 0
-		##pass
-	
-	pass # Replace with function body.
