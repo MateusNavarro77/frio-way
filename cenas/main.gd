@@ -17,9 +17,27 @@ var cena_onibus = preload("res://cenas/onibus.tscn")
 var pistas_rapidas_y = [117,183,240,287,338,367,423,480,540,604]
 var faixas_de_onibus = [117,604]
 var pistas_lentas_y = [160,216,324,384,438,544,600]
-var origem_carros_x = -10
+var origem_carros_x_esquerda = -10
+var origem_carros_x_direita = 1290
 var velocidade_dos_rapidos = 700
+var velocidade_onibus = 400.0
 
+enum Direcao { ESQUERDA, DIREITA }
+class OrigemVeiculos:
+	var posicao_x: int
+	var posicao_y: int
+	var direcao: Direcao
+	
+	# This constructor lets you pass values when making it
+	func _init(p_posx: int,p_posy: int, p_dir: Direcao) -> void:
+		posicao_x = p_posx
+		posicao_y = p_posy
+		direcao = p_dir
+
+var posicoes_onibus: Array[OrigemVeiculos] = [
+	OrigemVeiculos.new(origem_carros_x_esquerda,604,Direcao.ESQUERDA),
+	OrigemVeiculos.new(origem_carros_x_direita,117,Direcao.DIREITA)
+]
 var velocidade_dos_lentos = 300
 @onready var player:  = $Player
 @onready var hud: CanvasLayer = $HUD
@@ -47,7 +65,7 @@ func _on_timer_carros_rapidos_timeout() -> void:
 	add_child(carro)
 	var aleatorio = randi_range(0,pistas_rapidas_y.size()-1)
 	var posicao_pista_y = pistas_rapidas_y[aleatorio]
-	carro.position = Vector2(origem_carros_x,posicao_pista_y)
+	carro.position = Vector2(origem_carros_x_esquerda,posicao_pista_y)
 	carro.set_linear_velocity(Vector2(randf_range(velocidade_dos_rapidos,velocidade_dos_rapidos+10),0))
 	carro.set_linear_damp(0.0)
 	pass # Replace with function body.
@@ -60,7 +78,7 @@ func _on_timer_carros_lentos_timeout() -> void:
 	add_child(carro)
 	var aleatorio = randi_range(0,pistas_lentas_y.size()-1)
 	var posicao_pista_y = pistas_lentas_y[aleatorio]
-	carro.position = Vector2(origem_carros_x,posicao_pista_y)
+	carro.position = Vector2(origem_carros_x_esquerda,posicao_pista_y)
 	carro.set_linear_velocity(Vector2(randf_range(velocidade_dos_lentos,velocidade_dos_lentos+100),0))
 	carro.set_linear_damp(0.0)
 	pass # Replace with function body.
@@ -85,9 +103,32 @@ func _on_player_pontua() -> void:
 func _on_timer_onibus_timeout() -> void:
 	var onibus = cena_onibus.instantiate()
 	add_child(onibus)
-	var aleatorio = randi_range(0,faixas_de_onibus.size()-1)
-	var posicao_pista_y = faixas_de_onibus[aleatorio]
-	onibus.position = Vector2(origem_carros_x,posicao_pista_y)
-	onibus.set_linear_velocity(Vector2(100,0))
+	
+	# 1. Get a random index
+	var aleatorio = randi_range(0, posicoes_onibus.size() - 1)
+	
+	# 2. Extract the specific OrigemVeiculos element from the array
+	var dados_origem: OrigemVeiculos = posicoes_onibus[aleatorio]
+	
+	
+	var spawn_x = dados_origem.posicao_x
+	var spawn_y = dados_origem.posicao_y
+	
+	# Set the position using the extracted data
+	onibus.position = Vector2(spawn_x, spawn_y)
+	
+	# 4. Check the enum value to determine velocity direction
+	
+	if dados_origem.direcao == Direcao.ESQUERDA:
+		# Moving from left to right (Positive X velocity)
+		onibus.set_linear_velocity(Vector2(velocidade_onibus, 0))
+	elif dados_origem.direcao == Direcao.DIREITA:
+		# Moving from right to left (Negative X velocity)
+		onibus.set_linear_velocity(Vector2(-velocidade_onibus, 0))
+		
+		# Optional: Flip the sprite so the bus looks like it's driving left
+		# assuming your bus scene has a Sprite2D or AnimatedSprite2D root
+		if onibus.has_node("Sprite2D"): 
+			onibus.get_node("Sprite2D").flip_h = true
+			
 	onibus.set_linear_damp(0.0)
-	pass # Replace with function body.
