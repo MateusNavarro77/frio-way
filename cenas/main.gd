@@ -2,6 +2,7 @@ extends Node
 
 
 var cena_carros = preload("res://cenas/carros.tscn")
+var cena_onibus = preload("res://cenas/onibus.tscn")
 ## FAiXAS novas
 ## 117 onibus
 ## 183 carro
@@ -14,6 +15,7 @@ var cena_carros = preload("res://cenas/carros.tscn")
 ## 540 carro
 ## 604 onibus
 var pistas_rapidas_y = [117,183,240,287,338,367,423,480,540,604]
+var faixas_de_onibus = [117,604]
 var pistas_lentas_y = [160,216,324,384,438,544,600]
 var origem_carros_x = -10
 var velocidade_dos_rapidos = 700
@@ -77,4 +79,15 @@ func _on_player_pontua() -> void:
 		$Player.speed = 0
 		pass
 	
+	pass # Replace with function body.
+
+
+func _on_timer_onibus_timeout() -> void:
+	var onibus = cena_onibus.instantiate()
+	add_child(onibus)
+	var aleatorio = randi_range(0,faixas_de_onibus.size()-1)
+	var posicao_pista_y = faixas_de_onibus[aleatorio]
+	onibus.position = Vector2(origem_carros_x,posicao_pista_y)
+	onibus.set_linear_velocity(Vector2(100,0))
+	onibus.set_linear_damp(0.0)
 	pass # Replace with function body.

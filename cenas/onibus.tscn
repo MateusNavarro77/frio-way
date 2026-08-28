@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://yf6qgxyq1buv"]
 
-[ext_resource type="Texture2D" uid="uid://dkej0u6hcjnc8" path="res://material_freeway/carros/coches (1).png" id="1_gv5ow"]
+[ext_resource type="Script" uid="uid://c5b7d8skioows" path="res://cenas/onibus.gd" id="1_4gj7o"]
+[ext_resource type="Texture2D" uid="uid://du2fkmg0joutb" path="res://material_freeway/sprites_onibus/image.png" id="1_gv5ow"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_3wfqf"]
 animations = [{
@@ -14,18 +15,26 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gv5ow"]
-size = Vector2(236, 159)
+size = Vector2(733.3334, 156.66666)
 
 [node name="Onibus" type="RigidBody2D" unique_id=604640141]
+scale = Vector2(0.3, 0.3)
+collision_layer = 8
+collision_mask = 8
+gravity_scale = 0.0
+script = ExtResource("1_4gj7o")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=486331101]
-rect = Rect2(-109, -68, 223, 149)
+position = Vector2(0.8333333, -5.833333)
+rect = Rect2(-84.166664, -17.5, 183.33333, 46.666664)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1637754287]
-rotation = 1.5707964
+position = Vector2(2.3841858e-07, -3.8146973e-06)
+scale = Vector2(0.33536583, 0.13725491)
 sprite_frames = SubResource("SpriteFrames_3wfqf")
 animation = &"onibus_fortal"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1455789798]
-position = Vector2(0, -0.5)
+position = Vector2(-4.577637e-06, 4.038968e-28)
+scale = Vector2(0.3, 0.3)
 shape = SubResource("RectangleShape2D_gv5ow")
