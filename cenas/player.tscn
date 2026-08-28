@@ -10,6 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://dbslcvyv7ar3m" path="res://material_freeway/efeitos_extras/alex_jauk-chicken-noise-196746.wav" id="8_mp0j6"]
 [ext_resource type="AudioStream" uid="uid://dcghlno5qlkbq" path="res://material_freeway/efeitos_extras/alex_jauk-chicken-noise-228106.wav" id="9_8bq56"]
 [ext_resource type="AudioStream" uid="uid://ugu4mf4yfdq4" path="res://material_freeway/efeitos_extras/freesound_community-chicken-101726.wav" id="10_tckef"]
+[ext_resource type="AudioStream" uid="uid://ccgbrfnl5pcb4" path="res://material_freeway/sons/morreu.wav" id="11_8bq56"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_8ki28"]
 animations = [{
@@ -87,5 +88,8 @@ stream = ExtResource("9_8bq56")
 
 [node name="AudioPopo3" type="AudioStreamPlayer2D" parent="." unique_id=1619090943]
 stream = ExtResource("10_tckef")
+
+[node name="AudioMorreu" type="AudioStreamPlayer2D" parent="." unique_id=1264002633]
+stream = ExtResource("11_8bq56")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

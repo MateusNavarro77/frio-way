@@ -1,6 +1,7 @@
 extends Area2D
 #posicionar
 signal pontua
+signal morreu
 @export var speed: float = 200.0 #100 pixels por segundo
 var posicao_inicial: Vector2 = Vector2(640,690)
 var screen_size: Vector2
@@ -75,8 +76,10 @@ func checar_tempo(delta:float) -> bool:
 func _on_body_entered(body: Node2D) -> void:
 	if (body.name == "LinhaChegada"):
 		emit_signal("pontua")
+		$Audio.play()
 		return
-	$Audio.play()
+	emit_signal("morreu")
+	$AudioMorreu.play()
 	position = posicao_inicial
 	
 func tocar_popo_da_galinha():

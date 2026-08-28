@@ -3,6 +3,7 @@ extends Node
 
 var cena_carros = preload("res://cenas/carros.tscn")
 var cena_onibus = preload("res://cenas/onibus.tscn")
+var cena_bicicleta = preload("res://cenas/bicicleta.tscn")
 ## FAiXAS novas
 ## 117 onibus
 ## 183 carro
@@ -14,13 +15,14 @@ var cena_onibus = preload("res://cenas/onibus.tscn")
 ## 480 carro
 ## 540 carro
 ## 604 onibus
-var pistas_rapidas_y = [117,183,240,287,338,367,423,480,540,604]
+var pistas_rapidas_y = [183,287,480]
 var faixas_de_onibus = [117,604]
 var pistas_lentas_y = [160,216,324,384,438,544,600]
 var origem_carros_x_esquerda = -10
 var origem_carros_x_direita = 1290
 var velocidade_dos_rapidos = 700
 var velocidade_onibus = 400.0
+var velocidade_bicicleta = 200
 
 enum Direcao { ESQUERDA, DIREITA }
 class OrigemVeiculos:
@@ -37,6 +39,10 @@ class OrigemVeiculos:
 var posicoes_onibus: Array[OrigemVeiculos] = [
 	OrigemVeiculos.new(origem_carros_x_esquerda,604,Direcao.ESQUERDA),
 	OrigemVeiculos.new(origem_carros_x_direita,117,Direcao.DIREITA)
+]
+var posicoes_bicletas: Array[OrigemVeiculos] = [
+	OrigemVeiculos.new(origem_carros_x_esquerda,338,Direcao.ESQUERDA),
+	OrigemVeiculos.new(origem_carros_x_direita,367,Direcao.DIREITA)
 ]
 var velocidade_dos_lentos = 300
 @onready var player:  = $Player
@@ -132,3 +138,59 @@ func _on_timer_onibus_timeout() -> void:
 			onibus.get_node("Sprite2D").flip_h = true
 			
 	onibus.set_linear_damp(0.0)
+	
+	
+
+
+func _on_timer_bicicleta_timeout() -> void:
+	var bicicleta = cena_bicicleta.instantiate()
+	add_child(bicicleta)
+	
+	# 1. Get a random index
+	var aleatorio = randi_range(0, posicoes_bicletas.size() - 1)
+	
+	# 2. Extract the specific OrigemVeiculos element from the array
+	var dados_origem: OrigemVeiculos = posicoes_bicletas[aleatorio]
+	
+	
+	var spawn_x = dados_origem.posicao_x
+	var spawn_y = dados_origem.posicao_y
+	
+	# Set the position using the extracted data
+	bicicleta.position = Vector2(spawn_x, spawn_y)
+	
+	# 4. Check the enum value to determine velocity direction
+	
+	if dados_origem.direcao == Direcao.ESQUERDA:
+		# Moving from left to right (Positive X velocity)
+		bicicleta.set_linear_velocity(Vector2(velocidade_bicicleta, 0))
+	elif dados_origem.direcao == Direcao.DIREITA:
+		# Moving from right to left (Negative X velocity)
+		bicicleta.set_linear_velocity(Vector2(-velocidade_bicicleta, 0))
+		
+		# Optional: Flip the sprite so the bus looks like it's driving left
+		# assuming your bus scene has a Sprite2D or AnimatedSprite2D root
+		if bicicleta.has_node("Sprite2D"): 
+			bicicleta.get_node("Sprite2D").flip_h = true
+			
+	bicicleta.set_linear_damp(0.0)
+	
+	
+
+
+func _on_player_morreu() -> void:
+	pontos = 0
+	##hud._on_pontua(pontos)
+	##if(pontos==10):
+	$HUD/Mensagem.text ='GAME OVER ;-;'
+	$HUD/Button.show()
+	$TimerCarrosLentos.stop()
+	$TimerCarrosRapidos.stop()
+	$TimerOnibus.stop()
+	$TimerBicicleta.stop()
+	$AudioGameOver.play()
+	
+	$Player.speed = 0
+		##pass
+	
+	pass # Replace with function body.
