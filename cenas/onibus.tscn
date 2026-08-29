@@ -20,13 +20,8 @@ size = Vector2(366.6667, 156.66666)
 [node name="Onibus" type="RigidBody2D" unique_id=604640141]
 scale = Vector2(0.3, 0.3)
 collision_layer = 8
-collision_mask = 8
 gravity_scale = 0.0
 script = ExtResource("1_4gj7o")
-
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=486331101]
-position = Vector2(0.8333333, -5.833333)
-rect = Rect2(-54.166664, -17.5, 110, 46.666664)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1637754287]
 position = Vector2(0, 3.8146973e-06)
@@ -38,3 +33,7 @@ animation = &"onibus_fortal"
 position = Vector2(1.6666698, 4.038968e-28)
 scale = Vector2(0.3, 0.3)
 shape = SubResource("RectangleShape2D_gv5ow")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=486331101]
+position = Vector2(0, -6.6666665)
+rect = Rect2(-54.166664, -17.5, 110, 46.666664)
