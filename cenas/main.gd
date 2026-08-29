@@ -32,10 +32,10 @@ var origem_carros_x_direita = 1290
 # VELOCIDADES
 # ==========================================
 
-var velocidade_dos_rapidos = 700
-var velocidade_dos_lentos = 300
-var velocidade_onibus = 400.0
-var velocidade_bicicleta = 200
+var velocidade_dos_rapidos = 450
+var velocidade_dos_lentos = 200
+var velocidade_onibus = 300.0
+var velocidade_bicicleta = 150
 
 
 # ==========================================

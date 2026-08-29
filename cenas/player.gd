@@ -20,7 +20,7 @@ var tempo_passado=0
 func _ready() -> void:
 	screen_size = get_viewport().size
 	position = posicao_inicial
-	
+	$Animacao.play("cima")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -57,6 +57,11 @@ func _process(delta: float) -> void:
 
 	elif(vetor_velocidade.y<0):
 		$Animacao.play("cima")
+		
+	elif(vetor_velocidade.x<0):
+		$Animacao.play("esquerda")
+	elif(vetor_velocidade.x>0):
+		$Animacao.play("direita")
 
 	else:
 		$Animacao.stop()
@@ -77,6 +82,7 @@ func _on_body_entered(body: Node2D) -> void:
 	if (body.name == "LinhaChegada"):
 		emit_signal("pontua")
 		$Audio.play()
+		position = posicao_inicial
 		return
 	emit_signal("morreu")
 	$AudioMorreu.play()
