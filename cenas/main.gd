@@ -344,7 +344,7 @@ func _on_timer_bicicleta_timeout() -> void:
 		)
 
 		if bicicleta.has_node("AnimatedSprite2D"):
-			bicicleta.get_node("AnimatedSprite2D").flip_h = true
+			bicicleta.get_node("AnimatedSprite2D").flip_v = true
 
 	elif dados_origem.direcao == Direcao.DIREITA:
 		# Nasceu na esquerda -> vai para a direita

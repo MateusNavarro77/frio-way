@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dygpne7cnljlh"]
 
 [ext_resource type="Script" uid="uid://dfxt828h1boi8" path="res://cenas/bicicleta.gd" id="1_xylkr"]
-[ext_resource type="Texture2D" uid="uid://bym0eu4jb366t" path="res://material_freeway/sprites_bicicletas/image.png" id="2_skqis"]
+[ext_resource type="Texture2D" uid="uid://qnoi8dwm6fh8" path="res://material_freeway/sprites_bicicletas/ciclista.png" id="2_skqis"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_xylkr"]
 animations = [{
@@ -14,25 +14,27 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_fivwa"]
-size = Vector2(20.999985, 18.187502)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4gj7o"]
+radius = 5.0000005
+height = 60.000008
 
 [node name="Bicicleta" type="RigidBody2D" unique_id=1858028719]
 collision_layer = 16
-collision_mask = 16
 gravity_scale = 0.0
 script = ExtResource("1_xylkr")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=368624851]
-rect = Rect2(-11, -10, 22, 19)
+position = Vector2(0, -1)
+rect = Rect2(-31, 0, 60, 2)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1507347375]
-position = Vector2(-1.23056e-07, -2.7155033e-07)
-scale = Vector2(0.032258064, 0.02452316)
+position = Vector2(-1.4210855e-14, 2.842171e-14)
+rotation = 1.5707964
 sprite_frames = SubResource("SpriteFrames_xylkr")
 animation = &"bicicleta"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1883256215]
-position = Vector2(-7.6293945e-06, 2.3841858e-07)
+position = Vector2(-0.99999994, -3.5527133e-15)
+rotation = 1.5707964
 scale = Vector2(0.9999998, 0.9999998)
-shape = SubResource("RectangleShape2D_fivwa")
+shape = SubResource("CapsuleShape2D_4gj7o")

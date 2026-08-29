@@ -78,4 +78,12 @@ label_settings = SubResource("LabelSettings_8alo0")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="NomeRua" type="Label" parent="." unique_id=313444613]
+offset_right = 360.0
+offset_bottom = 46.0
+theme_override_fonts/font = ExtResource("1_nkjil")
+text = "Av. Alberto Craveiro"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
