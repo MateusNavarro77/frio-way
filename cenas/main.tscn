@@ -55,9 +55,13 @@ autostart = true
 [node name="AudioGameOver" type="AudioStreamPlayer2D" parent="." unique_id=779185229]
 stream = ExtResource("9_1yycb")
 
+[node name="TimerGameOver" type="Timer" parent="." unique_id=2042877212]
+autostart = true
+
 [connection signal="morreu" from="Player" to="." method="_on_player_morreu"]
 [connection signal="pontua" from="Player" to="." method="_on_player_pontua"]
 [connection signal="timeout" from="TimerCarrosRapidos" to="." method="_on_timer_carros_rapidos_timeout"]
 [connection signal="timeout" from="TimerCarrosLentos" to="." method="_on_timer_carros_lentos_timeout"]
 [connection signal="timeout" from="TimerOnibus" to="." method="_on_timer_onibus_timeout"]
 [connection signal="timeout" from="TimerBicicleta" to="." method="_on_timer_bicicleta_timeout"]
+[connection signal="timeout" from="TimerGameOver" to="." method="_on_timer_game_over_timeout"]

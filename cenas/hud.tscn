@@ -5,6 +5,8 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_p2jtt"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_8alo0"]
+
 [node name="HUD" type="CanvasLayer" unique_id=984349647]
 script = ExtResource("1_8alo0")
 
@@ -60,5 +62,20 @@ size_flags_vertical = 4
 theme_override_fonts/font = ExtResource("1_nkjil")
 theme_override_font_sizes/font_size = 32
 text = "Restart"
+
+[node name="TempoRestante" type="Label" parent="." unique_id=2105557785]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -333.0
+offset_bottom = 56.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(1, 0.00999999, 0.00999999, 1)
+theme_override_fonts/font = ExtResource("1_nkjil")
+theme_override_font_sizes/font_size = 32
+text = "Tempo restante: 300"
+label_settings = SubResource("LabelSettings_8alo0")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

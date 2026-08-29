@@ -11,3 +11,7 @@ func _on_button_pressed() -> void:
 
 func _on_pontua(pontuacao: int):
 	$Placar.text = str(pontuacao)
+
+
+func _atualizar_tempo_restante(tempo_restante: int):
+	$TempoRestante.text = 'Tempo restante: '+str(tempo_restante)

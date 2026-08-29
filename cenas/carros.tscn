@@ -132,7 +132,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4jdfh"]
-size = Vector2(96, 66)
+size = Vector2(50, 34)
 
 [node name="Carros" type="RigidBody2D" unique_id=2050511640]
 collision_layer = 4
@@ -149,6 +149,6 @@ animation = &"carro4"
 shape = SubResource("RectangleShape2D_4jdfh")
 
 [node name="Notificador" type="VisibleOnScreenNotifier2D" parent="." unique_id=1421590695]
-rect = Rect2(-46, -30, 92, 60)
+rect = Rect2(-25, -17, 50, 34)
 
 [connection signal="screen_exited" from="Notificador" to="." method="_on_notificador_screen_exited"]
