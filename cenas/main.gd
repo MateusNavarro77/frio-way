@@ -191,8 +191,8 @@ func _on_timer_carros_rapidos_timeout() -> void:
 			)
 		)
 
-		if carro.has_node("Sprite2D"):
-			carro.get_node("Sprite2D").flip_h = true
+		if carro.has_node("Animacao"):
+			carro.get_node("Animacao").flip_v = true
 
 	elif dados_origem.direcao == Direcao.DIREITA:
 		# Nasceu na esquerda -> vai para a direita
@@ -240,8 +240,8 @@ func _on_timer_carros_lentos_timeout() -> void:
 			)
 		)
 
-		if carro.has_node("Sprite2D"):
-			carro.get_node("Sprite2D").flip_h = true
+		if carro.has_node("Animacao"):
+			carro.get_node("Animacao").flip_v = true
 
 	elif dados_origem.direcao == Direcao.DIREITA:
 		# Nasceu na esquerda -> vai para a direita
@@ -306,8 +306,8 @@ func _on_timer_onibus_timeout() -> void:
 			Vector2(-velocidade_onibus, 0)
 		)
 
-		if onibus.has_node("Sprite2D"):
-			onibus.get_node("Sprite2D").flip_h = true
+		if onibus.has_node("AnimatedSprite2D"):
+			onibus.get_node("AnimatedSprite2D").flip_h = true
 
 	elif dados_origem.direcao == Direcao.DIREITA:
 		# Nasceu na esquerda -> vai para a direita
@@ -343,8 +343,8 @@ func _on_timer_bicicleta_timeout() -> void:
 			Vector2(-velocidade_bicicleta, 0)
 		)
 
-		if bicicleta.has_node("Sprite2D"):
-			bicicleta.get_node("Sprite2D").flip_h = true
+		if bicicleta.has_node("AnimatedSprite2D"):
+			bicicleta.get_node("AnimatedSprite2D").flip_h = true
 
 	elif dados_origem.direcao == Direcao.DIREITA:
 		# Nasceu na esquerda -> vai para a direita
