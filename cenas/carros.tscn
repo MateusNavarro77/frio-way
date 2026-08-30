@@ -136,6 +136,7 @@ size = Vector2(50, 34)
 
 [node name="Carros" type="RigidBody2D" unique_id=2050511640]
 collision_layer = 4
+collision_mask = 33
 gravity_scale = 0.0
 script = ExtResource("1_cc5d5")
 

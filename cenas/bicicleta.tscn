@@ -20,6 +20,7 @@ height = 60.000008
 
 [node name="Bicicleta" type="RigidBody2D" unique_id=1858028719]
 collision_layer = 16
+collision_mask = 33
 gravity_scale = 0.0
 script = ExtResource("1_xylkr")
 

@@ -20,6 +20,7 @@ size = Vector2(366.6667, 156.66666)
 [node name="Onibus" type="RigidBody2D" unique_id=604640141]
 scale = Vector2(0.3, 0.3)
 collision_layer = 8
+collision_mask = 33
 gravity_scale = 0.0
 script = ExtResource("1_4gj7o")
 

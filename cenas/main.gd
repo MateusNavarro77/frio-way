@@ -24,7 +24,7 @@ var cena_bicicleta = preload("res://cenas/bicicleta.tscn")
 # POSIÇÕES DE NASCIMENTO
 # ==========================================
 
-var origem_carros_x_esquerda = -10
+var origem_carros_x_esquerda = -20
 var origem_carros_x_direita = 1290
 
 
@@ -136,7 +136,7 @@ var posicoes_bicletas: Array[OrigemVeiculos] = [
 
 @onready var player = $Player
 @onready var hud: CanvasLayer = $HUD
-
+@onready var player2 = $Player2
 var pontos = 0
 const pontos_para_ganhar = 3
 const tempo_game_over = 60 # 300 segundos

@@ -9,6 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://bui5ikf6dtgai" path="res://material_freeway/sons/ponto.wav" id="6_bhvw8"]
 [ext_resource type="AudioStream" uid="uid://bj8al8nstad8o" path="res://material_freeway/sons/ganhou.wav" id="7_l8342"]
 [ext_resource type="AudioStream" uid="uid://y6yx1ne8ge08" path="res://material_freeway/sons/game_over.wav" id="9_1yycb"]
+[ext_resource type="PackedScene" uid="uid://o8ygkypfy8ul" path="res://cenas/player_2.tscn" id="10_jdavq"]
 
 [node name="Main" type="Node" unique_id=1257166544]
 script = ExtResource("1_v1d1r")
@@ -58,6 +59,8 @@ stream = ExtResource("9_1yycb")
 
 [node name="TimerGameOver" type="Timer" parent="." unique_id=2042877212]
 autostart = true
+
+[node name="Player2" parent="." unique_id=710548068 instance=ExtResource("10_jdavq")]
 
 [connection signal="morreu" from="Player" to="." method="_on_player_morreu"]
 [connection signal="pontua" from="Player" to="." method="_on_player_pontua"]
