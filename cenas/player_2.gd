@@ -33,17 +33,17 @@ func _process(delta: float) -> void:
 		#tocar_popo_da_galinha()
 	
 	
-	if(Input.is_action_pressed("ui_up")):
-		vetor_velocidade.y -=1
+	if Input.is_key_pressed(KEY_W):
+		vetor_velocidade.y -= 1
 	
-	if(Input.is_action_pressed("ui_down")):
-		vetor_velocidade.y +=1
+	if Input.is_key_pressed(KEY_S):
+		vetor_velocidade.y += 1
 		
-	if(Input.is_action_pressed("ui_right")):
-		vetor_velocidade.x +=1
+	if Input.is_key_pressed(KEY_D):
+		vetor_velocidade.x += 1
 	
-	if(Input.is_action_pressed("ui_left")):
-		vetor_velocidade.x -=1
+	if Input.is_key_pressed(KEY_A):
+		vetor_velocidade.x -= 1
 	
 	if(vetor_velocidade !=Vector2.ZERO):
 		vetor_velocidade = vetor_velocidade.normalized()*speed
