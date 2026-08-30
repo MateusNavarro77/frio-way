@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://sm0upmbeis3l" path="res://cenas/player.tscn" id="1_t4ukd"]
 [ext_resource type="Script" uid="uid://urol61cd8p7s" path="res://cenas/main.gd" id="1_v1d1r"]
 [ext_resource type="PackedScene" uid="uid://bxevocoawcnjj" path="res://cenas/linha_chegada.tscn" id="2_4fhxt"]
-[ext_resource type="Texture2D" uid="uid://b54d68yshkvp7" path="res://material_freeway/alberto_craveiro.png" id="2_v1d1r"]
+[ext_resource type="Texture2D" uid="uid://crjojcseemivo" path="res://material_freeway/alberto_detalhada.png" id="2_jdavq"]
 [ext_resource type="PackedScene" uid="uid://0heg7p342gfo" path="res://cenas/hud.tscn" id="4_b30p5"]
 [ext_resource type="AudioStream" uid="uid://cqltv8b2y70gb" path="res://material_freeway/sons/tema.wav" id="5_5wwvk"]
 [ext_resource type="AudioStream" uid="uid://bui5ikf6dtgai" path="res://material_freeway/sons/ponto.wav" id="6_bhvw8"]
@@ -14,13 +14,13 @@
 [node name="Main" type="Node" unique_id=1257166544]
 script = ExtResource("1_v1d1r")
 
-[node name="Pista" type="Sprite2D" parent="." unique_id=324805587]
-scale = Vector2(0.6666666, 0.6666666)
-texture = ExtResource("2_v1d1r")
-centered = false
-
 [node name="LinhaChegada" parent="." unique_id=1546344210 instance=ExtResource("2_4fhxt")]
 position = Vector2(640, 64)
+
+[node name="Pista" type="Sprite2D" parent="." unique_id=324805587]
+scale = Vector2(0.99999994, 1)
+texture = ExtResource("2_jdavq")
+centered = false
 
 [node name="Player" parent="." unique_id=674639014 instance=ExtResource("1_t4ukd")]
 position = Vector2(640, 690)
@@ -64,10 +64,10 @@ autostart = true
 
 [connection signal="morreu" from="Player" to="." method="_on_player_morreu"]
 [connection signal="pontua" from="Player" to="." method="_on_player_pontua"]
-[connection signal="morreu_p2" from="Player2" to="." method="_on_player_2_morreu"]
-[connection signal="pontua_p2" from="Player2" to="." method="_on_player_2_pontua"]
 [connection signal="timeout" from="TimerCarrosRapidos" to="." method="_on_timer_carros_rapidos_timeout"]
 [connection signal="timeout" from="TimerCarrosLentos" to="." method="_on_timer_carros_lentos_timeout"]
 [connection signal="timeout" from="TimerOnibus" to="." method="_on_timer_onibus_timeout"]
 [connection signal="timeout" from="TimerBicicleta" to="." method="_on_timer_bicicleta_timeout"]
 [connection signal="timeout" from="TimerGameOver" to="." method="_on_timer_game_over_timeout"]
+[connection signal="morreu_p2" from="Player2" to="." method="_on_player_2_morreu"]
+[connection signal="pontua_p2" from="Player2" to="." method="_on_player_2_pontua"]
