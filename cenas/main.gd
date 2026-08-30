@@ -137,10 +137,17 @@ var posicoes_bicletas: Array[OrigemVeiculos] = [
 @onready var player = $Player
 @onready var hud: CanvasLayer = $HUD
 @onready var player2 = $Player2
-var pontos = 0
-const pontos_para_ganhar = 3
-const tempo_game_over = 60 # 300 segundos
-var tempo_restante = tempo_game_over
+
+var pontos_p1: int = 0
+var pontos_p2: int = 0
+const pontos_para_ganhar: int = 3
+
+var vidas_p1: int = 3
+var vidas_p2: int = 3
+const max_vidas: int = 3
+
+const tempo_game_over: int = 60 # 300 segundos
+var tempo_restante: int = tempo_game_over
 
 # ==========================================
 # READY
@@ -148,6 +155,10 @@ var tempo_restante = tempo_game_over
 
 func _ready() -> void:
 	$HUD/Mensagem.text = ""
+	hud._on_pontua(pontos_p1)
+	hud._on_pontua_p2(pontos_p2)
+	hud._atualizar_vidas_p1(vidas_p1)
+	hud._atualizar_vidas_p2(vidas_p2)
 	hud._atualizar_tempo_restante(tempo_restante)
 	$HUD/Button.hide()
 
@@ -263,22 +274,21 @@ func _on_timer_carros_lentos_timeout() -> void:
 # ==========================================
 
 func _on_player_pontua() -> void:
-	pontos = pontos + 1
-	hud._on_pontua(pontos)
+	if vidas_p1 <= 0 or vidas_p2 <= 0:
+		return
+	pontos_p1 += 1
+	hud._on_pontua(pontos_p1)
+	if pontos_p1 >= pontos_para_ganhar:
+		ganhar_jogo("Player 1 Ganhou!")
 
-	if pontos == pontos_para_ganhar:
-		$HUD/Mensagem.text = "Sobreviveu!"
-		$HUD/Button.show()
 
-		$TimerCarrosLentos.stop()
-		$TimerCarrosRapidos.stop()
-		$TimerOnibus.stop()
-		$TimerBicicleta.stop()
-		$TimerGameOver.stop()
-		$AudioTema.stop()
-		$AudioVitoria.play()
-
-		$Player.speed = 0
+func _on_player_2_pontua() -> void:
+	if vidas_p1 <= 0 or vidas_p2 <= 0:
+		return
+	pontos_p2 += 1
+	hud._on_pontua_p2(pontos_p2)
+	if pontos_p2 >= pontos_para_ganhar:
+		ganhar_jogo("Player 2 Ganhou!")
 
 
 # ==========================================
@@ -356,26 +366,51 @@ func _on_timer_bicicleta_timeout() -> void:
 
 
 # ==========================================
-# PLAYER MORREU
+# PLAYER MORREU / VIDAS
 # ==========================================
 
 func _on_player_morreu() -> void:
-	perder_jogo()
+	if vidas_p1 <= 0:
+		return
+	vidas_p1 -= 1
+	hud._atualizar_vidas_p1(vidas_p1)
+	if vidas_p1 == 0:
+		ganhar_jogo("Player 2 Ganhou!")
+
+
+func _on_player_2_morreu() -> void:
+	if vidas_p2 <= 0:
+		return
+	vidas_p2 -= 1
+	hud._atualizar_vidas_p2(vidas_p2)
+	if vidas_p2 == 0:
+		ganhar_jogo("Player 1 Ganhou!")
 
 
 func _on_timer_game_over_timeout() -> void:
-	tempo_restante = tempo_restante -1
+	tempo_restante -= 1
 	hud._atualizar_tempo_restante(tempo_restante)
-	if(tempo_restante==0):
-		perder_jogo()
-	pass # Replace with function body.
+	if tempo_restante <= 0:
+		if pontos_p1 > pontos_p2:
+			ganhar_jogo("Player 1 Ganhou!")
+		elif pontos_p2 > pontos_p1:
+			ganhar_jogo("Player 2 Ganhou!")
+		else:
+			perder_jogo("Empate!")
 
 
-func perder_jogo():
-	pontos = 0
-	tempo_restante = tempo_game_over
+func ganhar_jogo(mensagem: String) -> void:
+	parar_jogo(mensagem)
+	$AudioVitoria.play()
 
-	$HUD/Mensagem.text = "GAME OVER ;-;"
+
+func perder_jogo(mensagem: String = "GAME OVER ;-;") -> void:
+	parar_jogo(mensagem)
+	$AudioGameOver.play()
+
+
+func parar_jogo(mensagem: String) -> void:
+	$HUD/Mensagem.text = mensagem
 	$HUD/Button.show()
 
 	$TimerCarrosLentos.stop()
@@ -383,8 +418,7 @@ func perder_jogo():
 	$TimerOnibus.stop()
 	$TimerBicicleta.stop()
 	$TimerGameOver.stop()
-
-	$AudioGameOver.play()
+	$AudioTema.stop()
 
 	$Player.speed = 0
-	
+	$Player2.speed = 0

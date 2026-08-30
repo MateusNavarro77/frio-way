@@ -64,6 +64,8 @@ autostart = true
 
 [connection signal="morreu" from="Player" to="." method="_on_player_morreu"]
 [connection signal="pontua" from="Player" to="." method="_on_player_pontua"]
+[connection signal="morreu_p2" from="Player2" to="." method="_on_player_2_morreu"]
+[connection signal="pontua_p2" from="Player2" to="." method="_on_player_2_pontua"]
 [connection signal="timeout" from="TimerCarrosRapidos" to="." method="_on_timer_carros_rapidos_timeout"]
 [connection signal="timeout" from="TimerCarrosLentos" to="." method="_on_timer_carros_lentos_timeout"]
 [connection signal="timeout" from="TimerOnibus" to="." method="_on_timer_onibus_timeout"]
