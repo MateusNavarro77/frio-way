@@ -48,9 +48,37 @@ func _process(delta: float) -> void:
 	if(vetor_velocidade !=Vector2.ZERO):
 		vetor_velocidade = vetor_velocidade.normalized()*speed
 	
-	position +=vetor_velocidade*delta
-	position.y = clamp(position.y,0.0,screen_size.y)
-	position.x = clamp(position.x,0.0,screen_size.x)
+	var outro_player: Node2D = get_parent().get_node_or_null("Player2") if get_parent() else null
+	const RAIO_COLISAO: float = 14.0
+	
+	var movimento = vetor_velocidade * delta
+	
+	if outro_player and is_instance_valid(outro_player):
+		var pos_futura_x = position + Vector2(movimento.x, 0)
+		var dist_atual = position.distance_to(outro_player.position)
+		var dist_futura_x = pos_futura_x.distance_to(outro_player.position)
+		
+		# Só bloqueia no X se estiver no limite de colisão E o movimento for aproximar ainda mais
+		if dist_futura_x < RAIO_COLISAO and dist_futura_x < dist_atual:
+			movimento.x = 0
+		
+		position.x += movimento.x
+		position.x = clamp(position.x, 0.0, screen_size.x)
+		
+		var pos_futura_y = position + Vector2(0, movimento.y)
+		dist_atual = position.distance_to(outro_player.position)
+		var dist_futura_y = pos_futura_y.distance_to(outro_player.position)
+		
+		# Só bloqueia no Y se estiver no limite de colisão E o movimento for aproximar ainda mais
+		if dist_futura_y < RAIO_COLISAO and dist_futura_y < dist_atual:
+			movimento.y = 0
+			
+		position.y += movimento.y
+		position.y = clamp(position.y, 0.0, screen_size.y)
+	else:
+		position += movimento
+		position.x = clamp(position.x, 0.0, screen_size.x)
+		position.y = clamp(position.y, 0.0, screen_size.y)
 	
 	if(vetor_velocidade.y > 0):
 		$Animacao.play("baixo")
@@ -65,19 +93,8 @@ func _process(delta: float) -> void:
 
 	else:
 		$Animacao.stop()
-		
 
-#func somaDoida(a:float,b:float) -> float:
-		#return a+b
-#
-#func checar_tempo(delta:float) -> bool:
-	#tempo_passado += delta
-	#if(tempo_passado>=TEMPO_ENTRE_POPOS):
-		#tempo_passado = 0
-		#return true
-	#return false
-	#
-	
+
 func _on_body_entered(body: Node2D) -> void:
 	if (body.name == "LinhaChegada"):
 		emit_signal("pontua")

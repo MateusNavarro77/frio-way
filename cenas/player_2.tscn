@@ -297,3 +297,5 @@ stream = ExtResource("4_5ubff")
 
 [node name="AudioMorreu" type="AudioStreamPlayer2D" parent="." unique_id=1955630095]
 stream = ExtResource("5_mwu46")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
