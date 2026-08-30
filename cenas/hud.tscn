@@ -33,9 +33,10 @@ vertical_alignment = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -50.0
-offset_right = 50.0
-offset_bottom = 60.0
+offset_left = -208.0
+offset_top = 2.0
+offset_right = -108.0
+offset_bottom = 62.0
 grow_horizontal = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("1_nkjil")
@@ -83,6 +84,23 @@ offset_right = 360.0
 offset_bottom = 46.0
 theme_override_fonts/font = ExtResource("1_nkjil")
 text = "Av. Alberto Craveiro"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Placar2" type="Label" parent="." unique_id=523653465]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 80.0
+offset_top = 2.0
+offset_right = 180.0
+offset_bottom = 62.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("1_nkjil")
+theme_override_font_sizes/font_size = 32
+text = "0"
+label_settings = SubResource("LabelSettings_p2jtt")
 horizontal_alignment = 1
 vertical_alignment = 1
 

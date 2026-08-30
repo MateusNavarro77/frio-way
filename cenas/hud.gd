@@ -15,3 +15,6 @@ func _on_pontua(pontuacao: int):
 
 func _atualizar_tempo_restante(tempo_restante: int):
 	$TempoRestante.text = 'Tempo restante: '+str(tempo_restante)
+
+func _on_pontua_p2(pontuacao: int):
+	$Placar2.text = str(pontuacao)
