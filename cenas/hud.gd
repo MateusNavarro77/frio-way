@@ -18,3 +18,7 @@ func _atualizar_tempo_restante(tempo_restante: int):
 
 func _on_pontua_p2(pontuacao: int):
 	$Placar2.text = str(pontuacao)
+	
+	
+fun _atualizar_vida_p2(n_vidas:int):
+		
